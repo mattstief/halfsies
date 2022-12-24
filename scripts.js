@@ -63,3 +63,15 @@ document.getElementById("days").addEventListener("input", function (event) {
     );
   }
 });
+
+const openButton = document.getElementById("modal-button");
+const modal = document.getElementById("modal");
+const closeButton = document.querySelector(".close-button");
+
+openButton.addEventListener("click", () => {
+  modal.style.display = "block";
+});
+
+closeButton.addEventListener("click", () => {
+  modal.style.display = "none";
+});

@@ -1,0 +1,76 @@
+body {
+  background-color: #d2f4ff;
+}
+/* Add some styling for the calculator */
+.calculator {
+  display: flex;
+  flex-direction: column;
+  width: 88vw;
+  height: 95vh;
+  font-size: 4vw;
+  margin: auto;
+  text-align: center;
+  border-radius: 0.5vw;
+}
+.calculator input {
+  margin: auto;
+  font-size: 4vw;
+  width: 88vw;
+  height: 8vh;
+  background-color: #ccc;
+  border: 4vw solid #333;
+  border-radius: 8vw;
+  border-width: 0.5vw;
+  text-align: center;
+}
+.calculator .result {
+  display: inline-block;
+  font-size: 4vw;
+  width: 88vw;
+  margin: auto;
+  text-align: center;
+}
+
+/* Add some styling for the labels */
+.calculator label {
+  font-size: 4vw;
+  width: 88vw;
+  margin: auto;
+  text-align: center;
+}
+.calculator button {
+  width: 88vw;
+  height: 12vh;
+  border-radius: 20vw;
+  border-width: 0.5vw;
+  font-size: 4vw;
+  margin: auto;
+  border-color: dimgray;
+}
+.calculator inline {
+  display: inline-block;
+  font-size: 4vw;
+  width: 88vw;
+  margin: auto;
+  text-align: center;
+}
+
+/* Add a media query to apply different styles for mobile devices */
+@media (max-aspect-ratio: 1/1) {
+  /* Add some styling for the calculator */
+  .calculator,
+  .calculator button,
+  .calculator input {
+    font-size: 6vw;
+  }
+  .calculator .result {
+    font-size: 15vw;
+  }
+  /* Add some styling for the labels */
+  .calculator label {
+    font-size: 10vw;
+  }
+  .calculator .inline {
+    font-size: 10vw;
+  }
+}

@@ -67,11 +67,14 @@ document.getElementById("days").addEventListener("input", function (event) {
 const openButton = document.getElementById("modal-button");
 const modal = document.getElementById("modal");
 const closeButton = document.querySelector(".close-button");
+const mainContainer = document.getElementById("main-container");
 
 openButton.addEventListener("click", () => {
   modal.style.display = "block";
+  mainContainer.style.filter = "blur(5px)";
 });
 
 closeButton.addEventListener("click", () => {
   modal.style.display = "none";
+  mainContainer.style.filter = "none";
 });

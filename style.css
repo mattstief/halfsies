@@ -123,3 +123,8 @@ body {
   font-size: 24px;
   cursor: pointer;
 }
+
+#main-container {
+  filter: blur(0px);
+  transition: filter 0.5s;
+}

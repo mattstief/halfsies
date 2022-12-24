@@ -1,76 +1,171 @@
 <style>
+  body {
+    background-color: #d2f4ff;
+  }
   /* Add some styling for the calculator */
   .calculator {
     display: flex;
     flex-direction: column;
+    width: 88vw;
+    height: 95vh;
+    font-size: 4vw;
+    margin: auto;
+    text-align: center;
+    border-radius: 0.5vw;
   }
   .calculator input {
-    font-size: 24px;
+    margin: auto;
+    font-size: 4vw;
+    width: 88vw;
+    height: 8vh;
+    background-color: #ccc;
+    border: 4vw solid #333;
+    border-radius: 8vw;
+    border-width: 0.5vw;
+    text-align: center;
   }
   .calculator .result {
-    font-size: 36px;
+    display: inline-block;
+    font-size: 4vw;
+    width: 88vw;
+    margin: auto;
+    text-align: center;
   }
+
   /* Add some styling for the labels */
   .calculator label {
-    font-size: 18px;
-    margin-right: 10px;
+    font-size: 4vw;
+    width: 88vw;
+    margin: auto;
+    text-align: center;
+  }
+  .calculator button {
+    width: 88vw;
+    height: 12vh;
+    border-radius: 20vw;
+    border-width: 0.5vw;
+    font-size: 4vw;
+    margin: auto;
+    border-color: dimgray;
+  }
+  .calculator inline {
+    display: inline-block;
+    font-size: 4vw;
+    width: 88vw;
+    margin: auto;
+    text-align: center;
+  }
+
+  /* Add a media query to apply different styles for mobile devices */
+  @media (max-aspect-ratio: 1/1) {
+    /* Add some styling for the calculator */
+    .calculator,
+    .calculator button,
+    .calculator input {
+      font-size: 6vw;
+    }
+    .calculator .result {
+      font-size: 15vw;
+    }
+    /* Add some styling for the labels */
+    .calculator label {
+      font-size: 10vw;
+    }
+    .calculator .inline {
+      font-size: 10vw;
+    }
   }
 </style>
 
 <div class="calculator">
   <!-- Add labels for the input and result -->
   <label for="input">Total monthly rent:</label>
-  <input id="input" type="text" />
-  <label for="days">Nights per month:</label>
-  <input id="days" type="text" />
-  <label for="result">"Halfsies":</label>
-  <div class="result" id="result">0</div>
+  <input
+    id="input"
+    type="text"
+    pattern="\$[0-9]*"
+    class="currency"
+    placeholder="Enter an amount in dollars"
+  />
+  <label for="days">Nights stayed per month:</label>
+  <input
+    id="days"
+    type="text"
+    pattern="[0-9]*"
+    placeholder="Enter a number of nights"
+  />
+  <button onclick="calculate()">Calculate</button>
+  <div class="flex">
+    <label for="result">"Halfsies":</label>
+    <span class="inline" id="result"></span>
+  </div>
   <!-- Add buttons for the calculator functions -->
-  <button onclick="calculate()">Calculate!</button>
 </div>
 
 <script>
   // Add a function to clear the input and result
   function clear() {
-    document.getElementById('input').value = '';
-    document.getElementById('result').innerHTML = '0';
+    document.getElementById("input").innerHTML = "$" + 0;
+    document.getElementById("result").innerHTML = "$" + 0;
+    document.getElementById("days").value = "0";
   }
-  // Add a function to calculate the result
+  //Add a function to calculate the result
   function calculate() {
     // Get the input value and calculate the result
-    const input = document.getElementById('input').value;
-    const days = document.getElementById('days').value;
-    if (isNaN(input)) {
-        document.getElementById('input').value = '';
-        alert('Invalid input! Please enter a valid number.');
-        return;
-    }
-    if (isNaN(days)) {
-        document.getElementById('days').value = '';
-        alert('Invalid input! Please enter a valid number.');
-        return;
-    }
+    const input = document.getElementById("input").value.substring(1);
+    const days = document.getElementById("days").value;
     if (days < 15) {
-        let result = 0.5 * (days/28) * input;
-        result = Math.round(result)
-        document.getElementById('result').innerHTML = result;
-    }
-    else {
-        let result = 0.5 * input;
-        result = Math.round(result)
-        document.getElementById('result').innerHTML = result;
+      let result = 0.5 * (days / 28) * input;
+      result = Math.round(result);
+      document.getElementById("result").innerHTML = "$" + result;
+    } else {
+      let result = 0.5 * input;
+      result = Math.round(result);
+      document.getElementById("result").innerHTML = "$" + result;
     }
     // Display the result
   }
   // Add a function to add a number or operator to the input
   function calcShare(val) {
-    document.getElementById('input').value += val;
+    document.getElementById("input").value += val;
   }
   // Add a function to clear the input when the page loads
-  window.onload = function() {
-    document.getElementById('input').value = '';
-    document.getElementById('days').value = '';
-    document.getElementById('result').value = '';
+  window.onload = function () {
+    document.getElementById("input").value = "";
+    document.getElementById("days").value = "";
+    document.getElementById("result").innerHTML = "";
+  };
+  // Add a flag to track whether the $ symbol has been added
+  let dollarAdded = false;
 
-  }
+  // Add an event listener for the monthly rent input event
+  document.getElementById("input").addEventListener("input", function (event) {
+    // Check if the $ symbol has already been added
+    let monthlyRent = document.getElementById("input").value;
+
+    if (isNaN(monthlyRent.substring(1))) {
+      document.getElementById("input").value = monthlyRent.slice(
+        0,
+        monthlyRent.length - 1
+      );
+    }
+    if (document.getElementById("input").value == "") {
+      dollarAdded = false;
+    }
+    if (!dollarAdded) {
+      // Prepend the input with a $ symbol
+      event.target.value = "$" + event.target.value;
+      dollarAdded = true;
+    }
+  });
+  // Add an event listener for the nights input event
+  document.getElementById("days").addEventListener("input", function (event) {
+    numDays = document.getElementById("days").value;
+    if (isNaN(numDays)) {
+      document.getElementById("days").value = numDays.slice(
+        0,
+        numDays.length - 1
+      );
+    }
+  });
 </script>

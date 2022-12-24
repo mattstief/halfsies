@@ -1,0 +1,76 @@
+<style>
+  /* Add some styling for the calculator */
+  .calculator {
+    display: flex;
+    flex-direction: column;
+  }
+  .calculator input {
+    font-size: 24px;
+  }
+  .calculator .result {
+    font-size: 36px;
+  }
+  /* Add some styling for the labels */
+  .calculator label {
+    font-size: 18px;
+    margin-right: 10px;
+  }
+</style>
+
+<div class="calculator">
+  <!-- Add labels for the input and result -->
+  <label for="input">Total monthly rent:</label>
+  <input id="input" type="text" />
+  <label for="days">Nights per month:</label>
+  <input id="days" type="text" />
+  <label for="result">"Halfsies":</label>
+  <div class="result" id="result">0</div>
+  <!-- Add buttons for the calculator functions -->
+  <button onclick="calculate()">Calculate!</button>
+</div>
+
+<script>
+  // Add a function to clear the input and result
+  function clear() {
+    document.getElementById('input').value = '';
+    document.getElementById('result').innerHTML = '0';
+  }
+  // Add a function to calculate the result
+  function calculate() {
+    // Get the input value and calculate the result
+    const input = document.getElementById('input').value;
+    const days = document.getElementById('days').value;
+    if (isNaN(input)) {
+        document.getElementById('input').value = '';
+        alert('Invalid input! Please enter a valid number.');
+        return;
+    }
+    if (isNaN(days)) {
+        document.getElementById('days').value = '';
+        alert('Invalid input! Please enter a valid number.');
+        return;
+    }
+    if (days < 15) {
+        let result = 0.5 * (days/28) * input;
+        result = Math.round(result)
+        document.getElementById('result').innerHTML = result;
+    }
+    else {
+        let result = 0.5 * input;
+        result = Math.round(result)
+        document.getElementById('result').innerHTML = result;
+    }
+    // Display the result
+  }
+  // Add a function to add a number or operator to the input
+  function calcShare(val) {
+    document.getElementById('input').value += val;
+  }
+  // Add a function to clear the input when the page loads
+  window.onload = function() {
+    document.getElementById('input').value = '';
+    document.getElementById('days').value = '';
+    document.getElementById('result').value = '';
+
+  }
+</script>

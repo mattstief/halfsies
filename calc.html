@@ -1,29 +1,36 @@
 <head>
   <link rel="stylesheet" href="style.css" />
+</head>
+<body>
   <div class="calculator">
-    <!-- Add labels for the input and result -->
-    <label for="input">Total monthly rent:</label>
-    <input
-      id="input"
-      type="text"
-      pattern="\$[0-9]*"
-      class="currency"
-      placeholder="Enter an amount in dollars"
-    />
-    <label for="days">Nights stayed per month:</label>
-    <input
-      id="days"
-      type="text"
-      pattern="[0-9]*"
-      placeholder="Enter a number of nights"
-    />
+    <!-- Monthly rent input with label -->
+    <div class="form">
+      <label for="input">Rent amount:</label>
+      <input
+        id="input"
+        type="text"
+        pattern="\$[0-9]*"
+        class="currency"
+        placeholder="Enter an amount in dollars"
+      />
+    </div>
+    <!-- Nights stayed input with label -->
+    <div class="form">
+      <label for="days">Nights stayed:</label>
+      <input
+        id="days"
+        type="text"
+        pattern="[0-9]*"
+        placeholder="Enter a number of nights"
+      />
+    </div>
+    <!-- Button that calls the calculate script -->
     <button onclick="calculate()">Calculate</button>
+    <!-- Flex container for result label and value -->
     <div class="flex">
       <label for="result">"Halfsies":</label>
       <span class="inline" id="result"></span>
     </div>
   </div>
-</head>
-<body>
   <script src="scripts.js"></script>
 </body>

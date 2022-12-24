@@ -29,6 +29,7 @@ body {
   width: 88vw;
   margin: auto;
   text-align: center;
+  color: green;
 }
 
 /* Add some styling for the labels */
@@ -47,17 +48,23 @@ body {
   margin: auto;
   border-color: dimgray;
 }
-.calculator inline {
-  display: inline-block;
+.calculator .inline {
   font-size: 4vw;
   width: 88vw;
   margin: auto;
   text-align: center;
+  color: rgb(0, 183, 0);
+}
+.calculator .form {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 7vh;
 }
 
 /* Add a media query to apply different styles for mobile devices */
 @media (max-aspect-ratio: 1/1) {
-  /* Add some styling for the calculator */
   .calculator,
   .calculator button,
   .calculator input {
@@ -66,7 +73,6 @@ body {
   .calculator .result {
     font-size: 15vw;
   }
-  /* Add some styling for the labels */
   .calculator label {
     font-size: 10vw;
   }
